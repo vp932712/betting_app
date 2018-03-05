@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  money: 1.5
+  bookie_id: 1
+  better_id: 1
+
+two:
+  name: MyString
+  money: 1.5
+  bookie_id: 1
+  better_id: 1
