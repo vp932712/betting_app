@@ -6,6 +6,5 @@ class User < ApplicationRecord
 	has_many :better_bets, foreign_key: :better_id, class_name: "Bet"
 
 
-  
 
 end

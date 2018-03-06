@@ -1,6 +1,11 @@
+# t.string "name"
+# t.float "money"
+# t.integer "bookie_id"
+# t.integer "better_id"
+# t.datetime "created_at", null: false
+# t.datetime "updated_at", null: false
+
 class UsersController < ApplicationController
-
-
 
   def index
     @users = User.all
@@ -17,7 +22,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.save
+
     if @user.save
       render json: @user
     else
@@ -25,10 +30,6 @@ class UsersController < ApplicationController
     end
 
   end
-
-
-
-
 
   private
 
