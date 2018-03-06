@@ -13,7 +13,6 @@
 
 class BetSerializer < ActiveModel::Serializer
   attributes :id, :category, :description, :bet_amount, :better_id, :bookie_id, :winner, :loser, :expires, :draw
-
-  # has_many :users
-  # has_many :betters
+  belongs_to :bookie
+  belongs_to :better
 end
