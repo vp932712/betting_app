@@ -18,23 +18,42 @@ class BetsController < ApplicationController
   end
 
 
-  def show
-    @bet = Bet.find(params[:id])
-    render json: @bet
-  end
-
-
 
   def create
+
     @bet = Bet.new(bet_params)
 
-    if @bet.save
-      render json: @bet
-    else
-      render json: {"error": "you suck "}
-    end
+     bet = @bet.bet_amount
+     @user = User.find(@bet.bookie_id)
+     amount = @user.money - bet
+     @user.update(money: amount)
+     @bet.save
+
+     render json: @bet
+
+end
+
+
+
+
+  def update
+    @bet = Bet.find(params[:id])
+
+    if !(@bet.better_id?)
+    @bet.update_attributes(bet_params)
+    @user = User.find(@bet.better_id)
+    amount = @user.money - @bet.bet_amount
+    @user.update(money: amount )
+  elsif !(@bet.loser?)
+
+    @bet.update_attributes(bet_params)
 
   end
+
+
+
+    render json: @bet
+end
 
 
 
@@ -43,7 +62,7 @@ class BetsController < ApplicationController
   private
 
   def bet_params
-    params.permit(:name, :money)
+   params.require(:bet).permit(:category, :bet_amount, :description, :better_id, :bookie_id, :winner, :looser )
   end
 
 
