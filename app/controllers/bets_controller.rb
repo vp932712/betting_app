@@ -17,6 +17,11 @@ class BetsController < ApplicationController
     render json: @bets
   end
 
+  def show
+    @bet = Bet.find(params[:id])
+    render json:@bet
+  end
+
   def create
     @bet = Bet.create(bet_params)
     bet = @bet.bet_amount
@@ -31,22 +36,14 @@ class BetsController < ApplicationController
 
   def update
     @bet = Bet.find(params[:id])
-
-    if !(@bet.better_id?)
-    @bet.update_attributes(bet_params)
-    @user = User.find(@bet.better_id)
-    amount = @user.money - @bet.bet_amount
-    @user.update(money: amount )
-  elsif !(@bet.loser?)
-
-    @bet.update_attributes(bet_params)
+    @bet.update(bet_params)
+    render json:@bet
 
   end
 
 
 
-    render json: @bet
-end
+
 
 
 
