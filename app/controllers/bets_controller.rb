@@ -24,11 +24,11 @@ class BetsController < ApplicationController
 
   def create
     @bet = Bet.create(bet_params)
-    bet = @bet.bet_amount
-    @user = User.find(@bet.bookie_id)
-
-    amount = @user.money - bet
-    @user.update(money: amount)
+    # bet = @bet.bet_amount
+    # @user = User.find(@bet.bookie_id)
+    #
+    # amount = @user.money - bet
+    # @user.update(money: amount)
     @bet.save
 
     render json: @bet
